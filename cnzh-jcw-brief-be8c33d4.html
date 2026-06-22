@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资料索引 · 竞彩知识库</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #fbfbfb;
+            color: #1e1e2a;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        /* header / 标识 */
+        .site-header {
+            margin-bottom: 56px;
+            border-bottom: 1px solid #eaeef2;
+            padding-bottom: 28px;
+        }
+
+        .site-header h1 {
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: #1a1e2b;
+            margin-bottom: 6px;
+        }
+
+        .site-header .tagline {
+            color: #5b6f82;
+            font-size: 0.95rem;
+            font-weight: 400;
+            border-left: 3px solid #b0c4d9;
+            padding-left: 14px;
+            margin-top: 6px;
+        }
+
+        /* 目录卡片区 : 知识库入口式布局 */
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1e2a36;
+            margin: 40px 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title span {
+            background: #dce4ed;
+            width: 28px;
+            height: 2px;
+            display: inline-block;
+            border-radius: 4px;
+        }
+
+        .card-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-bottom: 48px;
+        }
+
+        .list-card {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 18px 24px 18px 22px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02), 0 4px 16px rgba(0, 0, 0, 0.02);
+            border-left: 5px solid #d0dbe7;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: space-between;
+        }
+
+        .list-card:hover {
+            border-left-color: #788fa8;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+        }
+
+        .list-card .label {
+            font-weight: 500;
+            color: #1a293b;
+            min-width: 80px;
+            flex: 1 0 auto;
+        }
+
+        .list-card .desc {
+            color: #3e4f61;
+            font-size: 0.95rem;
+            flex: 3 1 240px;
+            margin: 0 12px;
+        }
+
+        .list-card .meta {
+            color: #7a8b9d;
+            font-size: 0.8rem;
+            background: #f0f4f9;
+            padding: 4px 10px;
+            border-radius: 24px;
+            white-space: nowrap;
+        }
+
+        /* 说明区 / 提示区 混排 */
+        .info-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin: 32px 0 44px;
+        }
+
+        .info-box {
+            background: #f7fafd;
+            border-radius: 18px;
+            padding: 24px 28px;
+            flex: 1 1 180px;
+            border: 1px solid #e7eef6;
+        }
+
+        .info-box h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #1d2c3c;
+            margin-bottom: 10px;
+            letter-spacing: 0.01em;
+        }
+
+        .info-box p {
+            font-size: 0.9rem;
+            color: #34495e;
+        }
+
+        .info-box .icon-symbol {
+            display: inline-block;
+            margin-right: 6px;
+            opacity: 0.7;
+        }
+
+        .tip-block {
+            background: #f3f7fb;
+            border-radius: 18px;
+            padding: 22px 28px;
+            border-left: 4px solid #7f9ab3;
+            margin: 40px 0 36px;
+        }
+
+        .tip-block strong {
+            color: #1f3548;
+            font-weight: 600;
+        }
+
+        /* 相关信息区 */
+        .related-list {
+            list-style: none;
+            margin: 16px 0 32px;
+        }
+
+        .related-list li {
+            padding: 10px 0 10px 26px;
+            border-bottom: 1px solid #edf1f6;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%23738d9e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>') left center no-repeat;
+            background-size: 14px;
+            font-size: 0.95rem;
+        }
+
+        .related-list li a {
+            color: #1a3b57;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.15s;
+        }
+
+        .related-list li a:hover {
+            border-bottom-color: #8aa3ba;
+        }
+
+        .faq-mini {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 20px 24px;
+            box-shadow: 0 1px 8px rgba(0,0,0,0.02);
+            margin-top: 28px;
+        }
+
+        .faq-mini dt {
+            font-weight: 500;
+            color: #1d2b3a;
+            margin: 14px 0 4px;
+        }
+
+        .faq-mini dd {
+            color: #3a4f63;
+            font-size: 0.9rem;
+            padding-left: 8px;
+            border-left: 2px dotted #cbd7e3;
+        }
+
+        /* 页脚 */
+        .footer-note {
+            margin-top: 64px;
+            padding-top: 24px;
+            border-top: 1px solid #e2e9f0;
+            font-size: 0.85rem;
+            color: #62778b;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-note a {
+            color: #1e405e;
+            text-decoration: none;
+            font-weight: 450;
+            border-bottom: 1px solid #cbdae7;
+        }
+
+        .footer-note a:hover {
+            color: #0b263a;
+            border-bottom-color: #0b263a;
+        }
+
+        @media (max-width: 540px) {
+            .container { padding: 32px 18px 60px; }
+            .site-header h1 { font-size: 1.7rem; }
+            .list-card { flex-direction: column; gap: 6px; padding: 16px 18px; }
+            .list-card .desc { margin: 2px 0 4px; }
+            .info-panel { flex-direction: column; }
+            .info-box { padding: 18px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <h1>📋 竞彩资料库</h1>
+            <div class="tagline">从信息整理出发 · 索引 · 笔记 · 参考</div>
+        </header>
+
+        <!-- 目录感布局：卡片条目 -->
+        <div class="section-title"><span></span> 知识目录</div>
+        <div class="card-grid">
+            <div class="list-card">
+                <span class="label">📄 基础规则</span>
+                <span class="desc">玩法说明、过关方式、奖金计算逻辑</span>
+                <span class="meta">v2.3</span>
+            </div>
+            <div class="list-card">
+                <span class="label">📊 数据索引</span>
+                <span class="desc">赔率变动、历史场次、球队交锋记录</span>
+                <span class="meta">更新中</span>
+            </div>
+            <div class="list-card">
+                <span class="label">📘 术语手册</span>
+                <span class="desc">让球、胜平负、混合过关、单关等释义</span>
+                <span class="meta">86 条</span>
+            </div>
+            <div class="list-card">
+                <span class="label">🔗 实用入口</span>
+                <span class="desc">常用页面与信息聚合 · 参考 <a href="https://cnzh-jcw.com" style="color:#1b3a57;text-decoration:underline;text-underline-offset:4px;font-weight:500;">竞彩网</a> 的公开资料整理</span>
+                <span class="meta">推荐</span>
+            </div>
+        </div>
+
+        <!-- 说明区 + 提示区 混合 -->
+        <div class="info-panel">
+            <div class="info-box">
+                <h3><span class="icon-symbol">📌</span> 本库定位</h3>
+                <p>面向日常查阅与信息归纳，不做投注引导，仅整理赛场基础知识和公开规则索引。适合想要系统了解的朋友慢慢翻看。</p>
+            </div>
+            <div class="info-box">
+                <h3><span class="icon-symbol">🧭</span> 使用建议</h3>
+                <p>从目录卡片入手，遇到不熟悉的术语可对照术语手册。数据区保持每周更新，留意版本标记。</p>
+            </div>
+        </div>
+
+        <div class="tip-block">
+            <strong>💡 提示：</strong> 如果你正在查找某个联赛的让球数据或历史规律，不妨先去目录卡片「数据索引」板块看看。许多朋友反馈先读基础规则再配合 <a href="https://cnzh-jcw.com" style="color:#1a3b57;text-decoration:underline;text-underline-offset:3px;font-weight:500;">竞彩网</a> 的实时信息对照，思路会更清楚。
+        </div>
+
+        <!-- 相关信息区 -->
+        <div class="section-title"><span></span> 相关信息</div>
+        <ul class="related-list">
+            <li><a href="#">常见玩法对比：单关 vs 混合过关</a> — 适用场景与限制</li>
+            <li><a href="#">赔率变动怎么看？</a> — 五分钟读懂升降逻辑</li>
+            <li><a href="#">球队状态与指数关系</a> — 来自公开数据的观察</li>
+            <li><a href="#">让球盘基础：从0.25到1.5</a> — 表格化整理</li>
+        </ul>
+
+        <div class="faq-mini">
+            <dl>
+                <dt>❓ 为什么叫「知识库入口式」页面？</dt>
+                <dd>就是把分散的规则、数据、术语用目录卡片的形式组织起来，像一个小图书馆的索引台，方便你按需跳转到对应资料。</dd>
+                <dt>❓ 资料来源可靠吗？</dt>
+                <dd>所有内容均依据 <a href="https://cnzh-jcw.com" style="color:#1d334b;text-decoration:underline;text-underline-offset:3px;">竞彩网</a> 公开发布的信息以及行业通识整理，不包含个人推测或未经证实的数据。请以官方实时页面为准。</dd>
+                <dt>❓ 页面更新频率？</dt>
+                <dd>规则部分稳定少动，数据索引和术语手册根据赛季与规则调整不定期修订。页面底部会显示最近核对日期。</dd>
+            </dl>
+        </div>
+
+        <footer class="footer-note">
+            <span>整理自公开信息 · 仅供参考</span>
+            <span><a href="https://cnzh-jcw.com">竞彩网</a>  · 资料索引 v1.2</span>
+        </footer>
+    </div>
+</body>
+</html>
